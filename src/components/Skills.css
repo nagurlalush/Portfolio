@@ -1,0 +1,184 @@
+.skills {
+  position: relative;
+  overflow: hidden;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.skill-category {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.category-title {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.category-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent);
+  transform-origin: left;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.skill-card-wrapper {
+  perspective: 1000px;
+}
+
+.skill-card {
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  background: rgba(16, 20, 32, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* Base state - clean 3D inner wrap */
+.skill-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+/* Hover border effect */
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.02));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity var(--transition-smooth);
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+  background: var(--gradient-primary);
+}
+
+.skill-icon-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.skill-icon {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s var(--ease-spring);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.15);
+}
+
+.skill-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.15;
+  z-index: 1;
+  transition: opacity 0.4s var(--ease-expo), transform 0.4s var(--ease-expo);
+}
+
+.skill-card:hover .skill-glow {
+  opacity: 0.4;
+  transform: scale(1.4);
+}
+
+.skill-emoji {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.2rem;
+  z-index: 3;
+}
+
+.skill-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.skill-progress-wrap {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-bar-container {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  box-shadow: 0 0 10px currentColor;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.skill-level-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  align-self: flex-end;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

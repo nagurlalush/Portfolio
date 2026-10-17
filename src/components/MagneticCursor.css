@@ -1,0 +1,74 @@
+.magnetic-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-blue);
+  box-shadow: 0 0 10px var(--accent-blue);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  margin: -3px 0 0 -3px; /* Center perfectly */
+  transition: opacity 0.2s ease, transform 0.2s var(--ease-expo);
+  will-change: transform;
+}
+
+.magnetic-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(0, 212, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  margin: -16px 0 0 -16px; /* Center perfectly */
+  transition: width 0.4s var(--ease-spring), height 0.4s var(--ease-spring), 
+              margin 0.4s var(--ease-spring), border-color 0.3s ease, 
+              background-color 0.3s ease, opacity 0.2s ease;
+  will-change: transform, width, height, margin;
+}
+
+.cursor-ambient-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, rgba(168, 85, 247, 0.04) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  mix-blend-mode: screen;
+  transition: opacity 0.5s ease;
+}
+
+/* Hover States on Interactive Elements */
+.magnetic-cursor-dot.interactive {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.magnetic-cursor-ring.interactive {
+  width: 50px;
+  height: 50px;
+  margin: -25px 0 0 -25px;
+  border-color: rgba(168, 85, 247, 0.7);
+  background-color: rgba(168, 85, 247, 0.08);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Hidden States (when mouse leaves window) */
+.magnetic-cursor-dot.hidden,
+.magnetic-cursor-ring.hidden {
+  opacity: 0;
+}
+
+/* Force override native cursors for true cinematic feel */
+a, button, input, textarea, select {
+  cursor: none !important;
+}
